@@ -11,17 +11,17 @@
     <version>0.0.1-SNAPSHOT</version>
     <description>Example project to show various Spring Boot-Actuator features.</description>
 
-<developers>
-    <developer>
-      <name>Michael J. Simons</name>
-      <email>michael@simons.ac</email>
-    </developer>
-  </developers>
+    <developers>
+        <developer>
+            <name>Michael J. Simons</name>
+            <email>michael@simons.ac</email>
+        </developer>
+    </developers>
 
-  <organization>
-    <name>michael-simons.eu</name>
-    <url>http://michael-simons.eu</url>
-  </organization>
+    <organization>
+        <name>michael-simons.eu</name>
+        <url>http://michael-simons.eu</url>
+    </organization>
 
 
     <parent>
@@ -40,6 +40,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
