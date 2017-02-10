@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomEndpoint extends AbstractEndpoint<String> {
 
-    public CustomEndpoint() {
-        super("custom", false, true);
-    }
+	public CustomEndpoint() {
+		super("custom", false, true);
+	}
 
-    @Override
-    public String invoke() {
-        return "The answer to everything can be found under /info\n";
-    }
+	@Override
+	public String invoke() {
+		return "The answer to everything can be found under /info\n";
+	}
 }

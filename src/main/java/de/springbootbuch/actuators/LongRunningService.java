@@ -10,39 +10,41 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 class Endpoint {
-    private final LongRunningService longRunningService;
 
-    public Endpoint(LongRunningService longRunningService) {
-        this.longRunningService = longRunningService;
-    }
+	private final LongRunningService longRunningService;
 
-    @GetMapping("/compute")
-    @ResponseBody
-    public String compute() {
-        this.longRunningService.doStuff();
-        return "Done\n";
-    }
+	public Endpoint(LongRunningService longRunningService) {
+		this.longRunningService = longRunningService;
+	}
+
+	@GetMapping("/compute")
+	@ResponseBody
+	public String compute() {
+		this.longRunningService.doStuff();
+		return "Done\n";
+	}
 }
 
 @Service
 public class LongRunningService {
-    private final CounterService counterService;
 
-    private final GaugeService gaugeService;
+	private final CounterService counterService;
 
-    public LongRunningService(CounterService counterService, GaugeService gaugeService) {
-        this.counterService = counterService;
-        this.gaugeService = gaugeService;
-    }
+	private final GaugeService gaugeService;
 
-    public void doStuff() {
-        final long sleep = ThreadLocalRandom.current().nextLong(500, 2000);
-        try {
-            Thread.sleep(sleep);
+	public LongRunningService(CounterService counterService, GaugeService gaugeService) {
+		this.counterService = counterService;
+		this.gaugeService = gaugeService;
+	}
 
-        } catch (InterruptedException ex) {
-        }
-        this.gaugeService.submit("longRunningService", sleep);
-        this.counterService.increment("longRunningService");
-    }
+	public void doStuff() {
+		final long sleep = ThreadLocalRandom.current().nextLong(500, 2000);
+		try {
+			Thread.sleep(sleep);
+
+		} catch (InterruptedException ex) {
+		}
+		this.gaugeService.submit("longRunningService", sleep);
+		this.counterService.increment("longRunningService");
+	}
 }
