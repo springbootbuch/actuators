@@ -32,13 +32,17 @@ public class LongRunningService {
 
 	private final GaugeService gaugeService;
 
-	public LongRunningService(CounterService counterService, GaugeService gaugeService) {
+	public LongRunningService(
+			CounterService counterService, 
+			GaugeService gaugeService
+	) {
 		this.counterService = counterService;
 		this.gaugeService = gaugeService;
 	}
 
 	public void doStuff() {
-		final long sleep = ThreadLocalRandom.current().nextLong(500, 2000);
+		final long sleep = ThreadLocalRandom.current()
+				.nextLong(500, 2000);
 		try {
 			Thread.sleep(sleep);
 

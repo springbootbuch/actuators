@@ -5,7 +5,8 @@ import org.springframework.boot.actuate.info.InfoContributor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AnswerInfoContributor implements InfoContributor {
+public class AnswerInfoContributor 
+		implements InfoContributor {
 
 	@Override
 	public void contribute(Info.Builder builder) {

@@ -4,7 +4,8 @@ import org.springframework.boot.actuate.endpoint.AbstractEndpoint;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomEndpoint extends AbstractEndpoint<String> {
+public class CustomEndpoint 
+		extends AbstractEndpoint<String> {
 
 	public CustomEndpoint() {
 		super("custom", false, true);
@@ -12,6 +13,7 @@ public class CustomEndpoint extends AbstractEndpoint<String> {
 
 	@Override
 	public String invoke() {
-		return "The answer to everything can be found under /info\n";
+		return "The answer to everything "
+				+ "can be found under /info\n";
 	}
 }
