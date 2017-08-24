@@ -18,9 +18,10 @@ public class BeanMetrics implements PublicMetrics {
 
 	@Override
 	public Collection<Metric<?>> metrics() {
-		final Metric<Integer> numberOfBeans = new Metric<>(
-				"beans.number", ctx.getBeanDefinitionCount()
-		);
+		final Metric<Integer> numberOfBeans = 
+				new Metric<>(
+						"beans.number", 
+						ctx.getBeanDefinitionCount());
 		return Arrays.asList(numberOfBeans);
 	}
 }
