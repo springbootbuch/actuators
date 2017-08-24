@@ -1,19 +1,37 @@
 package de.springbootbuch.actuators;
 
-import org.springframework.boot.actuate.endpoint.AbstractEndpoint;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.springframework.boot.endpoint.Endpoint;
+import org.springframework.boot.endpoint.ReadOperation;
+import org.springframework.boot.endpoint.Selector;
+import org.springframework.boot.endpoint.WriteOperation;
+import org.springframework.boot.endpoint.web.WebEndpointResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomEndpoint 
-		extends AbstractEndpoint<String> {
+@Endpoint(id = "custom")
+public class CustomEndpoint {
 
-	public CustomEndpoint() {
-		super("custom", false, true);
+	private final AtomicInteger cnt =
+			new AtomicInteger();
+	
+	@ReadOperation
+	public String someReadOperation() {
+		return "Current value " + cnt.get();
 	}
-
-	@Override
-	public String invoke() {
-		return "The answer to everything "
-				+ "can be found under /info\n";
+	
+	@WriteOperation
+	public String someWriteOperation() {
+		return "New value " + cnt.incrementAndGet();
 	}
+	
+	@ReadOperation
+	public WebEndpointResponse<Void> otherReadOperation(
+		@Selector String name
+	) {
+		return new WebEndpointResponse<>(
+				HttpStatus.NOT_IMPLEMENTED.value());
+	}	
 }
