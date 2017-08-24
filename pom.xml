@@ -94,6 +94,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <showDeprecation>true</showDeprecation>
+                    <compilerArgs>
+						<arg>-parameters</arg>
+					</compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -103,10 +106,9 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.19.0</version>
+                <version>0.22.0</version>
                 <configuration>
                     <images>
-
                         <image>
                             <name>petergrace/opentsdb-docker</name>
                             <alias>metrics-database</alias>
