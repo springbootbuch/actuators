@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-class Endpoint {
+class WebEndpoint {
 
 	private final LongRunningService longRunningService;
 
-	public Endpoint(LongRunningService longRunningService) {
+	public WebEndpoint(LongRunningService longRunningService) {
 		this.longRunningService = longRunningService;
 	}
 
