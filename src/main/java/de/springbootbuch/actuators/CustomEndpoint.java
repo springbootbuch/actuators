@@ -8,9 +8,12 @@ import org.springframework.boot.endpoint.Selector;
 import org.springframework.boot.endpoint.WriteOperation;
 import org.springframework.boot.endpoint.web.WebEndpointResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 
-@Component
+/**
+ * Part of springbootbuch.de.
+ * @author Michael J. Simons
+ * @author @rotnroll666
+ */
 @Endpoint(id = "custom")
 public class CustomEndpoint {
 
