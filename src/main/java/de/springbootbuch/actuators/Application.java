@@ -1,7 +1,7 @@
 package de.springbootbuch.actuators;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.ExportMetricWriter;
+import org.springframework.boot.actuate.autoconfigure.metrics.ExportMetricWriter;
 import org.springframework.boot.actuate.metrics.jmx.JmxMetricWriter;
 import org.springframework.boot.actuate.metrics.opentsdb.OpenTsdbGaugeWriter;
 import org.springframework.boot.actuate.metrics.writer.MetricWriter;
