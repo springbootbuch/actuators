@@ -22,7 +22,7 @@ public class SecurityConfig
 			.authorizeRequests()
 			.antMatchers("/application/metrics/counter**")
 				.permitAll()
-			.antMatchers("/application/metrics/**")
+			.antMatchers("/application/**")
 				.authenticated();
 	}
 }
