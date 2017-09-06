@@ -15,7 +15,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class UserDetailsConfig {
 
 	@Bean
-	public UserDetailsService userDetailsService() throws Exception {
+	public UserDetailsService userDetailsService() {
 		final InMemoryUserDetailsManager manager
 				= new InMemoryUserDetailsManager();
 		manager.createUser(
