@@ -82,40 +82,8 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <showDeprecation>true</showDeprecation>
-                    <compilerArgs>
-						<arg>-parameters</arg>
-					</compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.22.0</version>
-                <configuration>
-                    <images>
-                        <image>
-                            <name>petergrace/opentsdb-docker</name>
-                            <alias>metrics-database</alias>
-                            <run>
-                                <ports>
-                                    <port>4242:4242</port>
-                                </ports>
-                                <wait>
-                                    <log>TSDMain: Ready to serve on /0.0.0.0:4242</log>
-                                    <time>60000</time>
-                                </wait>
-                            </run>
-                        </image>
-                    </images>
-                </configuration>
             </plugin>
         </plugins>
     </build>
