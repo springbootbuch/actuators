@@ -2,11 +2,11 @@ package de.springbootbuch.actuators;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.springframework.boot.endpoint.Endpoint;
-import org.springframework.boot.endpoint.ReadOperation;
-import org.springframework.boot.endpoint.Selector;
-import org.springframework.boot.endpoint.WriteOperation;
-import org.springframework.boot.endpoint.web.WebEndpointResponse;
+import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
+import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+import org.springframework.boot.actuate.endpoint.annotation.Selector;
+import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
+import org.springframework.boot.actuate.endpoint.web.WebEndpointResponse;
 import org.springframework.http.HttpStatus;
 
 /**

@@ -1,8 +1,7 @@
 package de.springbootbuch.actuators;
 
+import io.micrometer.core.instrument.MeterRegistry;
 import java.util.concurrent.ThreadLocalRandom;
-import org.springframework.boot.actuate.metrics.CounterService;
-import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +27,12 @@ class WebEndpoint {
 @Service
 public class LongRunningService {
 
-	private final CounterService counterService;
-
-	private final GaugeService gaugeService;
+	private final MeterRegistry meterRegistry;
 
 	public LongRunningService(
-			CounterService counterService, 
-			GaugeService gaugeService
+			MeterRegistry meterRegistry
 	) {
-		this.counterService = counterService;
-		this.gaugeService = gaugeService;
+		this.meterRegistry = meterRegistry;
 	}
 
 	public void doStuff() {
@@ -45,10 +40,12 @@ public class LongRunningService {
 				.nextLong(500, 2000);
 		try {
 			Thread.sleep(sleep);
-
 		} catch (InterruptedException ex) {
 		}
-		this.gaugeService.submit("longRunningService", sleep);
-		this.counterService.increment("longRunningService");
+		this.meterRegistry
+			.gauge("longRunningService.gauge", sleep);
+		this.meterRegistry
+			.counter("longRunningService.counter")
+			.increment();
 	}
 }

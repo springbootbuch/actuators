@@ -1,6 +1,6 @@
 package de.springbootbuch.actuators;
 
-import org.springframework.boot.actuate.autoconfigure.ManagementContextConfiguration;
+import org.springframework.boot.actuate.autoconfigure.web.ManagementContextConfiguration;
 import org.springframework.context.annotation.Bean;
 
 /**
