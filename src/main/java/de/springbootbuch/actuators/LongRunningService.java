@@ -1,7 +1,13 @@
 package de.springbootbuch.actuators;
 
+import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
+import java.util.ArrayList;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadLocalRandom;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +25,10 @@ class WebEndpoint {
 	@GetMapping("/compute")
 	@ResponseBody
 	public String compute() {
-		this.longRunningService.doStuff();
+		try {
+			this.longRunningService.doStuff();
+		} catch (InterruptedException ex) {
+		}
 		return "Done\n";
 	}
 }
@@ -27,25 +36,40 @@ class WebEndpoint {
 @Service
 public class LongRunningService {
 
-	private final MeterRegistry meterRegistry;
+	final BlockingQueue<Integer> someQueue;
+	final Timer timer;
+	final Counter counter;
 
 	public LongRunningService(
-			MeterRegistry meterRegistry
+			MeterRegistry registry
 	) {
-		this.meterRegistry = meterRegistry;
+		this.someQueue = registry
+			.gauge(
+				"longRunningService.gauge",
+				new LinkedBlockingQueue<Integer>(),
+				LinkedBlockingQueue::size
+			);
+		this.timer = registry
+			.timer("longRunningService.timer");
+		this.counter = registry
+			.counter("longRunningService.counter");
 	}
 
-	public void doStuff() {
-		final long sleep = ThreadLocalRandom.current()
-				.nextLong(500, 2000);
-		try {
-			Thread.sleep(sleep);
-		} catch (InterruptedException ex) {
-		}
-		this.meterRegistry
-			.gauge("longRunningService.gauge", sleep);
-		this.meterRegistry
-			.counter("longRunningService.counter")
-			.increment();
+	public void doStuff() throws InterruptedException {
+		final ThreadLocalRandom random = 
+			ThreadLocalRandom.current();
+
+		random.ints(10).boxed()
+			.forEach(someQueue::offer);
+		someQueue.drainTo(
+			new ArrayList<>(),
+			random.nextInt(someQueue.size())
+		);
+
+		final long sleep = random.nextLong(200, 2000);
+		Thread.sleep(sleep);
+		this.timer.record(sleep, MILLISECONDS);
+
+		this.counter.increment();
 	}
 }
