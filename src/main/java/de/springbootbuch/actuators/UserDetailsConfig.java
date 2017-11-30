@@ -20,7 +20,7 @@ public class UserDetailsConfig {
 				= new InMemoryUserDetailsManager();
 		manager.createUser(
 				User.withUsername("test")
-						.password("test")
+						.password("{noop}test")
 						.roles("USER", "ACTUATOR")
 						.build()
 		);
