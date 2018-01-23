@@ -1,6 +1,6 @@
 package de.springbootbuch.actuators;
 
-import org.springframework.boot.actuate.autoconfigure.security.EndpointRequest;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.actuate.metrics.MetricsEndpoint;
 import org.springframework.boot.actuate.autoconfigure.condition.ConditionsReportEndpoint;
 import org.springframework.context.annotation.Profile;
