@@ -54,3 +54,6 @@ logs/
 .project
 .settings/
 .factorypath
+
+.idea/
+*.iml
